@@ -1,6 +1,6 @@
 import { Logo } from "../logo";
 import { SidebarItem } from "../sidebar-item";
-
+/* import Calendar from '../../assets/images/icons/calendar.svg' */
 export class Sidebar {
   constructor(aside = document.createElement("aside")) {
     this.sidebar = aside;
