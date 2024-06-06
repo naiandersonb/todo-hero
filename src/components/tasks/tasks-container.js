@@ -4,6 +4,10 @@ export class TasksContainer {
     this.tasksContainer.classList.add("tasks-container");
   }
 
+  addElement(element) {
+    this.tasksContainer.appendChild(element);
+  }
+
   render() {
     return this.tasksContainer;
   }

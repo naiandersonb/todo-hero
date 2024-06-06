@@ -79,5 +79,16 @@ body {
 }
 
 .tasks-container {
-  overflow-Y: auto;
+  overflow-Y: auto; 
+}
+
+.task-content {
+  max-width: 1000px;
+  margin: 5rem auto 0;
+}
+
+.task-content__title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 3rem;
 }
