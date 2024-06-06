@@ -1,10 +1,10 @@
 import "./styles/style.css";
 
-import CalendarIcon from "./assets/images/icons/calendar.svg";
-import TrashIcon from "./assets/images/icons/trash.svg";
 import { logo } from "./components/logo";
 import { newTaskBtn } from "./components/new-task-btn";
+import { NewTaskForm } from "./components/new-task-form";
 import { Sidebar } from "./components/sidebar";
+import { TaskRow } from "./components/task-row";
 import { Task } from "./controllers/Task";
 import { createElement } from "./utils/createElement";
 
@@ -65,62 +65,28 @@ window.addEventListener("DOMContentLoaded", () => {
       date: new Date(),
     });
   }
-
   const allTasks = tasks.getTasks();
+
+  const handleDeleteTask = (id, element) => {
+    tasks.deleteTask(id);
+    tasksContent.removeChild(element);
+  };
+
+  const form = NewTaskForm()
+
   if (allTasks.length > 0) {
     for (let task of allTasks) {
-      const taskEl = createElement("div", "task-content__row");
-      const taskBody = createElement("article");
-
-      const dateEle = createElement("header", "task-row__date");
-      const date = createElement("span");
-      date.innerText = new Date(task.date).toLocaleDateString();
-      const calendarIcon = createElement("img");
-      calendarIcon.src = CalendarIcon;
-      calendarIcon.style.width = "1rem";
-      dateEle.appendChild(calendarIcon);
-      dateEle.appendChild(date);
-
-      const taskTitleEl = createElement("h4");
-      taskTitleEl.innerText = task.title;
-      taskBody.appendChild(taskTitleEl);
-
-      if (task.description) {
-        const taskDescEl = createElement("p");
-        taskDescEl.innerText = task.description;
-        taskBody.appendChild(taskDescEl);
-      }
-
-      const deleteTaskBtn = createElement("button", "task-btn__delete");
-      const icon = createElement("img");
-      icon.src = TrashIcon;
-      deleteTaskBtn.appendChild(icon);
-
-      deleteTaskBtn.addEventListener("click", () => {
-        tasks.deleteTask(task.id);
-        tasksContent.removeChild(taskEl);
-      });
-
-      const priorityEl = createElement(
-        "span",
-        `task-priority__${task.priority}`
-      );
-      priorityEl.classList.add("task-priority");
-      priorityEl.innerText = task.priority;
-
-      const footer = createElement("footer");
-      footer.appendChild(dateEle);
-      footer.appendChild(priorityEl);
-
-      taskEl.appendChild(taskBody);
-      taskEl.appendChild(deleteTaskBtn);
-      taskBody.appendChild(footer);
-      tasksContent.appendChild(taskEl);
-      newTaskBtn.style.marginTop = "2rem";
-      tasksContent.appendChild(newTaskBtn);
+      const taskCard = TaskRow(task, () => handleDeleteTask(task.id, taskCard));
+      tasksContent.appendChild(taskCard);
     }
-  } else {
+
+    newTaskBtn.style.marginTop = "2rem";
     tasksContent.appendChild(newTaskBtn);
+    tasksContent.appendChild(form);
+  } else {
+    newTaskBtn.style.marginTop = "2rem";
+    tasksContent.appendChild(newTaskBtn);
+    tasksContent.appendChild(form);
   }
 
   app.appendChild(sidebar.render());
