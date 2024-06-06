@@ -47,13 +47,10 @@ body {
 
 .sidebar {
   height: 100vh;
-
   padding: 1rem;
-
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-
   background-color: var(--neutral-950);
   color: var(--neutral-50);
 }
@@ -78,17 +75,14 @@ body {
   transition: background-color 0.2s ease-in-out;
 }
 
+
+
 .tasks-container {
+  padding: 2rem;
   overflow-Y: auto; 
 }
 
-.task-content {
+.tasks-content {
+  margin: 4rem auto 0;
   max-width: 1000px;
-  margin: 5rem auto 0;
-}
-
-.task-content__title {
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: 3rem;
 }
