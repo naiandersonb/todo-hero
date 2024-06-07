@@ -1,6 +1,8 @@
 import CalendarIcon from "../assets/images/icons/calendar.svg";
 import TrashIcon from "../assets/images/icons/trash.svg";
+import { Task } from "../controllers/Task";
 import { DOMUtils } from "../utils/dom-utils";
+const tasksManger = new Task()
 
 export function TaskRow(task, deleteTask) {
   const taskCardEl = DOMUtils.createElement("div", ["task-content__row"]);
@@ -20,7 +22,9 @@ export function TaskRow(task, deleteTask) {
   const trashIcon = DOMUtils.createIcon(TrashIcon);
   deleteTaskBtn.appendChild(trashIcon);
 
-  deleteTaskBtn.addEventListener("click", deleteTask);
+  deleteTaskBtn.addEventListener("click", () => {
+    tasksManger.deleteTask(task.id)
+  });
 
   taskCardEl.appendChild(taskBody);
   taskCardEl.appendChild(deleteTaskBtn);

@@ -1,7 +1,7 @@
 ### Todo Features
-- [ ] View all projects.
+- [x] View all projects.
 
-- [ ] View all todos in each project (probably just the title and duedate… perhaps changing color for different priorities).
+- [x] View all todos in each project (probably just the title and duedate… perhaps changing color for different priorities).
 
 - [ ] Expand a single todo to see/edit its details.
 
