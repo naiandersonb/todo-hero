@@ -1,9 +1,9 @@
 :root {
-  --neutral-50: #fafafa;
-  --neutral-400: #a3a3a3;
-  --neutral-800: #262626;
-  --neutral-900: #18181b;
-  --neutral-950: #0a0a0a;
+  --neutral-50: #fafaf9;
+  --neutral-400: #a8a29e;
+  --neutral-800: #292524;
+  --neutral-900: #1c1917;
+  --neutral-950: #0c0a09;
 
   --brand-color: #acff79;
 
@@ -30,6 +30,12 @@
   font-style: normal;
 }
 
+body {
+  font-family: "Inter Tight", sans-serif;
+  background-color: var(--neutral-900);
+  color: var(--neutral-50);
+}
+
 h1,
 h2,
 h3,
@@ -39,18 +45,39 @@ h6 {
   font-family: "Space Grotesk", sans-serif;
 }
 
-body {
-  font-family: "Inter Tight", sans-serif;
-  background-color: var(--neutral-900);
-  color: var(--neutral-50);
-}
-
 #app {
   display: grid;
   grid-template-columns: 250px 1fr;
   gap: 1em;
   height: 100vh;
   overflow: hidden;
+}
+
+/* utilities classes --------------------------------------- */
+
+.hidden {
+  display: none;
+}
+
+.btn {
+  background-color: transparent;
+  color: var(--neutral-50);
+  border: none;
+  font-size: 1em;
+  font-weight: 600;
+  padding: 0.5rem 1em;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn__primary {
+  background-color: var(--brand-color);
+  color: var(--neutral-950);
+}
+
+.btn__secondary {
+  background-color: var(--neutral-800);
+  color: var(--neutral-50);
 }
 
 .sidebar {
@@ -90,7 +117,7 @@ body {
 
 .tasks-content {
   margin: 4rem auto 0;
-  max-width: 1000px;
+  max-width: 800px;
 }
 
 .tasks-content__list {
@@ -212,10 +239,25 @@ body {
   font-weight: normal; /* Apenas para garantir que não seja bold */
 }
 
-.show {
-  display: initial;
+.task-form__footer {
+  padding: 0.5rem;
+  border-top: 1px solid var(--neutral-800);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
 }
 
-.hidden {
-  display: none;
+.task-form__group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.input-date {
+  font-weight: normal;
+  background-color: transparent;
+  border: 1px solid var(--neutral-800);
+  color-scheme: dark;
+  font-size: 0.875rem;
 }

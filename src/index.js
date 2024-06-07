@@ -50,44 +50,58 @@ projectsBtn.addEventListener("click", () => {
 
 tasksContainer.appendChild(tasksContent);
 
-window.addEventListener("DOMContentLoaded", () => {
-  const priority = {
-    1: "low",
-    2: "medium",
-    3: "hight",
-  };
-  for (let i = 0; i < 3; i++) {
-    tasks.createTask({
-      priority: priority[i + 1] ?? "low",
-      title: "Lorem ipsum dolor, sit amet consectetur adipisicing elit.",
-      description:
-        "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugiat, ad? Quasi ducimus quibusdam, minima autem eaque veniam, inventore obcaecati pariatur nostrum perspiciatis laborum eius repellendus aperiam. Quam adipisci incidunt culpa!",
-      date: new Date(),
-    });
-  }
+const renderTasks = () => {
+  tasksList.innerHTML = "";
+
   const allTasks = tasks.getTasks();
 
   const handleDeleteTask = (id, element) => {
     tasks.deleteTask(id);
-    tasksContent.removeChild(element);
+    tasksList.removeChild(element);
   };
-
-  const form = NewTaskForm()
 
   if (allTasks.length > 0) {
     for (let task of allTasks) {
       const taskCard = TaskRow(task, () => handleDeleteTask(task.id, taskCard));
-      tasksContent.appendChild(taskCard);
+      tasksList.appendChild(taskCard);
     }
-
-    newTaskBtn.style.marginTop = "2rem";
-    tasksContent.appendChild(newTaskBtn);
-    tasksContent.appendChild(form);
-  } else {
-    newTaskBtn.style.marginTop = "2rem";
-    tasksContent.appendChild(newTaskBtn);
-    tasksContent.appendChild(form);
   }
+};
+
+window.addEventListener("DOMContentLoaded", () => {
+  const form = NewTaskForm();
+  form.style.marginTop = "1rem";
+
+  renderTasks();
+
+  newTaskBtn.style.marginTop = "2rem";
+  tasksContent.appendChild(newTaskBtn);
+
+  newTaskBtn.addEventListener("click", () => {
+    tasksContent.appendChild(form);
+    newTaskBtn.classList.add("hidden");
+  });
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.target);
+    const title = formData.get("title");
+    const description = formData.get("description");
+    const date = formData.get("due-date");
+
+    tasks.createTask({
+      title,
+      description,
+      date: date ? new Date(date) : new Date(),
+    });
+
+    renderTasks();
+    form.reset();
+
+    tasksContent.removeChild(form);
+    newTaskBtn.classList.remove("hidden");
+  });
 
   app.appendChild(sidebar.render());
   app.appendChild(tasksContainer);
