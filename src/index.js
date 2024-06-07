@@ -6,15 +6,18 @@ import { NewTaskForm } from "./components/new-task-form";
 import { renderTasks } from "./components/render-tasks";
 import { Sidebar } from "./components/sidebar";
 import { Task } from "./controllers/Task";
+import { createTask } from "./utils/create-task";
 import { createElement } from "./utils/createElement";
 import { DOMUtils } from "./utils/dom-utils";
 
 const app = document.getElementById("app");
 const tasks = new Task();
+let allTasks = tasks.getTasks();
 
 const handleDeleteTask = (id, element) => {
   tasks.deleteTask(id);
   tasksList.removeChild(element);
+  allTasks = tasks.getTasks();
 };
 
 const sidebar = new Sidebar();
@@ -42,14 +45,6 @@ pageTitle.innerText = "Tasks";
 tasksContent.appendChild(pageTitle);
 tasksContent.appendChild(tasksList);
 
-allTasksBtn.addEventListener("click", () => {
-  pageTitle.innerText = "All tasks";
-});
-
-todayTasksBtn.addEventListener("click", () => {
-  pageTitle.innerText = "Today tasks";
-});
-
 projectsBtn.addEventListener("click", () => {
   pageTitle.innerText = "Projects";
 });
@@ -60,7 +55,24 @@ window.addEventListener("DOMContentLoaded", () => {
   const form = NewTaskForm();
   form.style.marginTop = "1rem";
 
-  renderTasks(tasks, tasksList, handleDeleteTask);
+  renderTasks(allTasks, tasksList, handleDeleteTask);
+
+  allTasksBtn.addEventListener("click", () => {
+    pageTitle.innerText = "Tasks";
+    renderTasks(allTasks, tasksList, handleDeleteTask);
+  });
+
+  todayTasksBtn.addEventListener("click", () => {
+    pageTitle.innerText = "Today tasks";
+    const todayTasks = tasks.getTodayTasks()
+
+    if(todayTasks.length > 0) {
+      renderTasks(todayTasks, tasksList, handleDeleteTask);
+    } else {
+      tasksList.innerText = ''
+    }
+
+  });
 
   todayTasksBtn.addEventListener("click", () => {
     pageTitle.innerText = "Today tasks";
@@ -74,25 +86,17 @@ window.addEventListener("DOMContentLoaded", () => {
     newTaskBtn.classList.add("hidden");
   });
 
+  const handleCreate = (newTask) => {
+    tasks.createTask(newTask)
+  }
+
   form.addEventListener("submit", (e) => {
     e.preventDefault();
+    
+    createTask(e, handleCreate)
+    allTasks = tasks.getTasks();
 
-    const formData = new FormData(e.target);
-    const title = formData.get("title");
-    const description = formData.get("description");
-    const date = formData.get("due-date");
-    const priority = formData.get("priority");
-
-    if (!title) return;
-
-    tasks.createTask({
-      title,
-      description,
-      priority,
-      date: date ? new Date(date) : new Date(),
-    });
-
-    renderTasks(tasks, tasksList, handleDeleteTask);
+    renderTasks(allTasks, tasksList, handleDeleteTask);
     form.reset();
 
     tasksContent.removeChild(form);
