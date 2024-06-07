@@ -40,7 +40,13 @@ const Footer = (taskDate, priority) => {
   calendarIcon.style.width = "1rem";
 
   const date = DOMUtils.createElement("span");
-  date.innerText = new Date(taskDate).toLocaleDateString();
+  const dueDate = new Date(taskDate);
+
+  const day = dueDate.getUTCDate()
+  const month = dueDate.getUTCMonth().toString().padStart(2, 0);
+  const year = dueDate.getUTCFullYear().toString().padStart(2, 0);
+ 
+  date.innerText = `${day}/${month}/${year}`;
 
   dateEl.appendChild(calendarIcon);
   dateEl.appendChild(date);

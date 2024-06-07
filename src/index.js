@@ -3,8 +3,8 @@ import "./styles/style.css";
 import { logo } from "./components/logo";
 import { newTaskBtn } from "./components/new-task-btn";
 import { NewTaskForm } from "./components/new-task-form";
+import { renderTasks, tasksList } from "./components/render-tasks";
 import { Sidebar } from "./components/sidebar";
-import { TaskRow } from "./components/task-row";
 import { Task } from "./controllers/Task";
 import { createElement } from "./utils/createElement";
 
@@ -28,7 +28,6 @@ sidebar.addElements([logo, allTasksBtn, todayTasksBtn, projectsBtn]);
 
 const tasksContainer = createElement("section", "tasks-container");
 const tasksContent = createElement("div", "tasks-content");
-const tasksList = createElement("div", "tasks-content__list");
 
 const pageTitle = createElement("h2");
 pageTitle.innerText = "Tasks";
@@ -50,29 +49,11 @@ projectsBtn.addEventListener("click", () => {
 
 tasksContainer.appendChild(tasksContent);
 
-const renderTasks = () => {
-  tasksList.innerHTML = "";
-
-  const allTasks = tasks.getTasks();
-
-  const handleDeleteTask = (id, element) => {
-    tasks.deleteTask(id);
-    tasksList.removeChild(element);
-  };
-
-  if (allTasks.length > 0) {
-    for (let task of allTasks) {
-      const taskCard = TaskRow(task, () => handleDeleteTask(task.id, taskCard));
-      tasksList.appendChild(taskCard);
-    }
-  }
-};
-
 window.addEventListener("DOMContentLoaded", () => {
   const form = NewTaskForm();
   form.style.marginTop = "1rem";
 
-  renderTasks();
+  renderTasks(tasks);
 
   newTaskBtn.style.marginTop = "2rem";
   tasksContent.appendChild(newTaskBtn);
@@ -100,7 +81,7 @@ window.addEventListener("DOMContentLoaded", () => {
       date: date ? new Date(date) : new Date(),
     });
 
-    renderTasks();
+    renderTasks(tasks);
     form.reset();
 
     tasksContent.removeChild(form);

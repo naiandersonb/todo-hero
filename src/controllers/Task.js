@@ -1,3 +1,5 @@
+import { compareDates } from "../utils/compare-dates";
+
 export class Task {
   #localStorageId = "@todo-hero:tasks";
 
@@ -29,6 +31,12 @@ export class Task {
     this.tasks.push(newTask);
 
     this.#saveTasks();
+  }
+
+  getTodayTasks() {
+    const todayTasks = this.tasks.filter(t => compareDates(new Date(t.date), new Date()))
+
+    return todayTasks ?? [];
   }
 
   deleteTask(id) {

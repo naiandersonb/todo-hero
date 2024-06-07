@@ -31,7 +31,7 @@ const descriptionInput = Field("textarea", "description", "Task description");
 const selectPriority = DOMUtils.createSelect("priority", [
   "low",
   "medium",
-  "high",
+  "hight",
 ]);
 
 const taskDateField = Field("input", "due-date", "Select task date");
