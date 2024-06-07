@@ -80,6 +80,24 @@ h6 {
   color: var(--neutral-50);
 }
 
+.select {
+  background-color: var(--neutral-900);
+  color: var(--neutral-50);
+  border: 1px solid var(--neutral-800);
+  font-size: 0.875em;
+  font-weight: 400;
+  padding: 0.5rem 1em 0.5rem 0;
+  border-radius: 4px;
+  cursor: pointer;
+  color-scheme: dark;
+}
+
+option {
+  background-color: transparent;
+  color: var(--neutral-50);
+  border: 1px solid var(--neutral-800);
+}
+
 .sidebar {
   height: 100vh;
   padding: 1rem;

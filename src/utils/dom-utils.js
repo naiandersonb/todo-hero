@@ -55,6 +55,29 @@ export class DOMUtils {
   }
 
   /**
+   * Creates a new HTML select element with options.
+   *
+   * @param {string} name - The name attribute of the select element.
+   * @param {string[]} [options=[]] - An array of options to populate the select element.
+   * @returns {HTMLSelectElement} - The newly created HTML select element.
+   */
+  static createSelect(name, options = []) {
+    const select = document.createElement("select");
+    select.classList.add("select");
+    select.name = name;
+
+    for (let option of options) {
+      const optionEl = DOMUtils.createElement("option");
+      optionEl.classList.add("option");
+      optionEl.value = option;
+      optionEl.innerText = option;
+      select.appendChild(optionEl);
+    }
+
+    return select;
+  }
+
+  /**
    * Toggles one or more class names on an element.
    *
    * @param {HTMLElement} element - The element to toggle class names on.

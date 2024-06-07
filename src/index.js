@@ -89,10 +89,14 @@ window.addEventListener("DOMContentLoaded", () => {
     const title = formData.get("title");
     const description = formData.get("description");
     const date = formData.get("due-date");
+    const priority = formData.get("priority");
+
+    if (!title) return;
 
     tasks.createTask({
       title,
       description,
+      priority,
       date: date ? new Date(date) : new Date(),
     });
 
