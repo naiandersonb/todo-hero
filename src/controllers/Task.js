@@ -19,7 +19,7 @@ export class Task {
 
   createTask(task) {
     const newTask = {
-      id: this.tasks.length + 1,
+      id: new Date().getTime(),
       title: task.title,
       description: task.description ?? null,
       priority: task.priority ?? "low",

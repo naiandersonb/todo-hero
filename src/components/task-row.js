@@ -1,8 +1,6 @@
 import CalendarIcon from "../assets/images/icons/calendar.svg";
 import TrashIcon from "../assets/images/icons/trash.svg";
-import { Task } from "../controllers/Task";
 import { DOMUtils } from "../utils/dom-utils";
-const tasksManger = new Task()
 
 export function TaskRow(task, deleteTask) {
   const taskCardEl = DOMUtils.createElement("div", ["task-content__row"]);
@@ -23,7 +21,7 @@ export function TaskRow(task, deleteTask) {
   deleteTaskBtn.appendChild(trashIcon);
 
   deleteTaskBtn.addEventListener("click", () => {
-    tasksManger.deleteTask(task.id)
+    deleteTask(task.id)
   });
 
   taskCardEl.appendChild(taskBody);
@@ -46,7 +44,7 @@ const Footer = (taskDate, priority) => {
   const date = DOMUtils.createElement("span");
   const dueDate = new Date(taskDate);
 
-  const day = dueDate.getUTCDate()
+  const day = dueDate.getUTCDate().toString().padStart(2, 0);
   const month = dueDate.getUTCMonth().toString().padStart(2, 0);
   const year = dueDate.getUTCFullYear().toString().padStart(2, 0);
  
