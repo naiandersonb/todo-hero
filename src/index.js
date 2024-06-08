@@ -7,7 +7,6 @@ import { Sidebar } from "./components/sidebar";
 import { Task } from "./controllers/Task";
 import "./styles/style.css";
 import { createTask } from "./utils/create-task";
-import { createElement } from "./utils/createElement";
 import { DOMUtils } from "./utils/dom-utils";
 import { URLParams } from "./utils/url-params";
 
@@ -24,19 +23,19 @@ const handleDeleteTask = (id, element) => {
 
 
 const tasksList = DOMUtils.createElement("div", ["tasks-content__list"]);
-const pageTitle = createElement("h2");
+const pageTitle = DOMUtils.createElement("h2");
 
 const createSidebar = () => {
   const sidebar = new Sidebar();
 
-  const allTasksBtn = createElement("button", "sidebar-item");
+  const allTasksBtn = DOMUtils.createElement("button", ["sidebar-item"]);
   allTasksBtn.style.marginTop = "3rem";
   allTasksBtn.innerText = "All";
 
-  const todayTasksBtn = createElement("button", "sidebar-item");
+  const todayTasksBtn = DOMUtils.createElement("button", ["sidebar-item"]);
   todayTasksBtn.innerText = "Today";
 
-  const projectsBtn = createElement("button", "sidebar-item");
+  const projectsBtn = DOMUtils.createElement("button", ["sidebar-item"]);
   projectsBtn.style.marginTop = "2rem";
   projectsBtn.innerText = "Projects";
 
@@ -74,8 +73,8 @@ const createSidebar = () => {
 
 
 const createTasksContainer = () => {
-  const tasksContainer = createElement("section", "tasks-container");
-  const tasksContent = createElement("div", "tasks-content");
+  const tasksContainer = DOMUtils.createElement("section", ["tasks-container"]);
+  const tasksContent = DOMUtils.createElement("div", ["tasks-content"]);
   
   pageTitle.innerText = "Tasks";
 
