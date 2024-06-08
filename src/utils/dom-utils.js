@@ -55,6 +55,15 @@ export class DOMUtils {
   }
 
   /**
+   * 
+   * @param {HTMLElement} element - the element to set chields
+   * @param {HTMLElement[]} chields - list of elements
+   */
+  static appendElements(element, chields) {
+    chields.forEach((child) => element.appendChild(child));
+  }
+
+  /**
    * Creates a new HTML select element with options.
    *
    * @param {string} name - The name attribute of the select element.

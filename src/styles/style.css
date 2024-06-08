@@ -108,6 +108,13 @@ option {
   color: var(--neutral-50);
 }
 
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
 .sidebar-item {
   display: flex;
   align-items: center;
@@ -291,5 +298,7 @@ option {
     width: 100%;
   }
 }
+
+
 
 

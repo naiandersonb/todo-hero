@@ -1,6 +1,5 @@
 import { TaskRow } from './task-row';
 
-
 export const renderTasks = (tasks, element, handleDelete) => {
   element.innerHTML = "";
 

@@ -24,8 +24,7 @@ export function TaskRow(task, deleteTask) {
     deleteTask(task.id)
   });
 
-  taskCardEl.appendChild(taskBody);
-  taskCardEl.appendChild(deleteTaskBtn);
+  DOMUtils.appendElements(taskCardEl, [taskBody,deleteTaskBtn])
 
   const footer = Footer(task.date, task.priority)
   taskBody.appendChild(footer);
@@ -59,8 +58,7 @@ const Footer = (taskDate, priority) => {
   ]);
   priorityEl.innerText = priority;
 
-  footer.appendChild(dateEl);
-  footer.appendChild(priorityEl);
+  DOMUtils.appendElements(footer, [dateEl,priorityEl])
 
   return footer
 }
